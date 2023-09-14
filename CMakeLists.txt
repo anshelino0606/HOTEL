@@ -7,4 +7,5 @@ add_executable(HOTEL main.cpp
         Rooms/Room.cpp
         Date/Date.cpp
         Rooms/RoomStandard.cpp
-        Rooms/RoomLux.cpp)
+        Rooms/RoomLux.cpp
+        Hotel/Hotel.cpp)
