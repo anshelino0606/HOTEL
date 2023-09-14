@@ -4,5 +4,7 @@ project(HOTEL)
 set(CMAKE_CXX_STANDARD 17)
 
 add_executable(HOTEL main.cpp
-        Room.cpp
-        Date.cpp)
+        Rooms/Room.cpp
+        Date/Date.cpp
+        Rooms/RoomStandard.cpp
+        Rooms/RoomLux.cpp)

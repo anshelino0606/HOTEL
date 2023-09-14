@@ -10,7 +10,7 @@ Room::Room(unsigned int noRooms, unsigned int roomArea, unsigned int maxCapacity
 
 }
 
-bool isDateInRange(const Date& date, const Date& rangeStart, const Date& rangeEnd) {
+bool Room::isDateInRange(const Date& date, const Date& rangeStart, const Date& rangeEnd) {
     // Compare year, month, and day of the dates to check if date is in range
     if (date.getYear() > rangeEnd.getYear() || date.getYear() < rangeStart.getYear())
         return false;
