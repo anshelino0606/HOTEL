@@ -13,18 +13,33 @@ public:
 
     Room(unsigned int noRooms,
         unsigned int roomArea,
-        unsigned int noAvailableRooms,
+        unsigned int maxCapacity,
         Date* datesBooked,
         unsigned int pricePerNight);
 
-    bool isNumberAvailableAt(const Date& dateStart, const Date& dateEnd);
+
+    // is number available at certain date for certain amount of people
+    bool isNumberAvailableAt(const Date& dateStart, const Date& dateEnd, unsigned int number);
+
+    // cost for range of dates
     unsigned int calculateCost(const Date& dateStart, const Date& dateEnd);
+
+    // number of days for booked room
     unsigned int calculateNumberOfDays(const Date& dateStart, const Date& dateEnd);
+
+    // comparison of price
+    bool operator<(const Room& other) const;
+    bool operator>(const Room& other) const;
+    bool operator>=(const Room& other) const;
+    bool operator<=(const Room& other) const;
+    bool operator==(const Room& other) const;
+    bool operator!=(const Room& other) const;
+
 
 private:
     unsigned int noRooms;
     unsigned int roomArea;
-    unsigned int noAvailableRooms;
+    unsigned int maxCapacity;
     Date* datesBooked;
     unsigned int pricePerNight;
 };
