@@ -146,7 +146,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=HOTEL
+CMAKE_PROJECT_NAME:STATIC=Functionality/Hotel
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/Library/Developer/CommandLineTools/usr/bin/ranlib
@@ -211,6 +211,24 @@ CMAKE_STRIP:FILEPATH=/Library/Developer/CommandLineTools/usr/bin/strip
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //Value Computed by CMake
+FUNCTIONALITY/Hotel_BINARY_DIR:STATIC=/Users/anhelinamodenko/CLionProjects/HOTEL/cmake-build-debug
+
+//Value Computed by CMake
+FUNCTIONALITY/Hotel_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+FUNCTIONALITY/Hotel_SOURCE_DIR:STATIC=/Users/anhelinamodenko/CLionProjects/HOTEL
+
+//Value Computed by CMake
+Functionality/Hotel_BINARY_DIR:STATIC=/Users/anhelinamodenko/CLionProjects/HOTEL/cmake-build-debug
+
+//Value Computed by CMake
+Functionality/Hotel_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+Functionality/Hotel_SOURCE_DIR:STATIC=/Users/anhelinamodenko/CLionProjects/HOTEL
+
+//Value Computed by CMake
 HOTEL_BINARY_DIR:STATIC=/Users/anhelinamodenko/CLionProjects/HOTEL/cmake-build-debug
 
 //Value Computed by CMake
@@ -218,6 +236,15 @@ HOTEL_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
 HOTEL_SOURCE_DIR:STATIC=/Users/anhelinamodenko/CLionProjects/HOTEL
+
+//Value Computed by CMake
+STRUCTURE/Hotel_BINARY_DIR:STATIC=/Users/anhelinamodenko/CLionProjects/HOTEL/cmake-build-debug
+
+//Value Computed by CMake
+STRUCTURE/Hotel_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
+STRUCTURE/Hotel_SOURCE_DIR:STATIC=/Users/anhelinamodenko/CLionProjects/HOTEL
 
 
 ########################

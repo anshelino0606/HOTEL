@@ -11,7 +11,7 @@
 # =============================================================================
 
 # =============================================================================
-# Project: HOTEL
+# Project: Functionality/Hotel
 # Configurations: Debug
 # =============================================================================
 
@@ -41,65 +41,65 @@ include CMakeFiles/rules.ninja
 
 cmake_ninja_workdir = /Users/anhelinamodenko/CLionProjects/HOTEL/cmake-build-debug/
 # =============================================================================
-# Object build statements for EXECUTABLE target HOTEL
+# Object build statements for EXECUTABLE target main.cpp
 
 
 #############################################
-# Order-only phony target for HOTEL
+# Order-only phony target for main.cpp
 
-build cmake_object_order_depends_target_HOTEL: phony || CMakeFiles/HOTEL.dir
+build cmake_object_order_depends_target_main.cpp: phony || CMakeFiles/main.cpp.dir
 
-build CMakeFiles/HOTEL.dir/main.cpp.o: CXX_COMPILER__HOTEL_unscanned_Debug /Users/anhelinamodenko/CLionProjects/HOTEL/main.cpp || cmake_object_order_depends_target_HOTEL
-  DEP_FILE = CMakeFiles/HOTEL.dir/main.cpp.o.d
+build CMakeFiles/main.cpp.dir/Functionality/Rooms/Room.cpp.o: CXX_COMPILER__main.2ecpp_unscanned_Debug /Users/anhelinamodenko/CLionProjects/HOTEL/Functionality/Rooms/Room.cpp || cmake_object_order_depends_target_main.cpp
+  DEP_FILE = CMakeFiles/main.cpp.dir/Functionality/Rooms/Room.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
-  OBJECT_DIR = CMakeFiles/HOTEL.dir
-  OBJECT_FILE_DIR = CMakeFiles/HOTEL.dir
+  OBJECT_DIR = CMakeFiles/main.cpp.dir
+  OBJECT_FILE_DIR = CMakeFiles/main.cpp.dir/Functionality/Rooms
 
-build CMakeFiles/HOTEL.dir/Rooms/Room.cpp.o: CXX_COMPILER__HOTEL_unscanned_Debug /Users/anhelinamodenko/CLionProjects/HOTEL/Rooms/Room.cpp || cmake_object_order_depends_target_HOTEL
-  DEP_FILE = CMakeFiles/HOTEL.dir/Rooms/Room.cpp.o.d
+build CMakeFiles/main.cpp.dir/Functionality/Date/Date.cpp.o: CXX_COMPILER__main.2ecpp_unscanned_Debug /Users/anhelinamodenko/CLionProjects/HOTEL/Functionality/Date/Date.cpp || cmake_object_order_depends_target_main.cpp
+  DEP_FILE = CMakeFiles/main.cpp.dir/Functionality/Date/Date.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
-  OBJECT_DIR = CMakeFiles/HOTEL.dir
-  OBJECT_FILE_DIR = CMakeFiles/HOTEL.dir/Rooms
+  OBJECT_DIR = CMakeFiles/main.cpp.dir
+  OBJECT_FILE_DIR = CMakeFiles/main.cpp.dir/Functionality/Date
 
-build CMakeFiles/HOTEL.dir/Date/Date.cpp.o: CXX_COMPILER__HOTEL_unscanned_Debug /Users/anhelinamodenko/CLionProjects/HOTEL/Date/Date.cpp || cmake_object_order_depends_target_HOTEL
-  DEP_FILE = CMakeFiles/HOTEL.dir/Date/Date.cpp.o.d
+build CMakeFiles/main.cpp.dir/Functionality/Rooms/RoomStandard.cpp.o: CXX_COMPILER__main.2ecpp_unscanned_Debug /Users/anhelinamodenko/CLionProjects/HOTEL/Functionality/Rooms/RoomStandard.cpp || cmake_object_order_depends_target_main.cpp
+  DEP_FILE = CMakeFiles/main.cpp.dir/Functionality/Rooms/RoomStandard.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
-  OBJECT_DIR = CMakeFiles/HOTEL.dir
-  OBJECT_FILE_DIR = CMakeFiles/HOTEL.dir/Date
+  OBJECT_DIR = CMakeFiles/main.cpp.dir
+  OBJECT_FILE_DIR = CMakeFiles/main.cpp.dir/Functionality/Rooms
 
-build CMakeFiles/HOTEL.dir/Rooms/RoomStandard.cpp.o: CXX_COMPILER__HOTEL_unscanned_Debug /Users/anhelinamodenko/CLionProjects/HOTEL/Rooms/RoomStandard.cpp || cmake_object_order_depends_target_HOTEL
-  DEP_FILE = CMakeFiles/HOTEL.dir/Rooms/RoomStandard.cpp.o.d
+build CMakeFiles/main.cpp.dir/Functionality/Rooms/RoomLux.cpp.o: CXX_COMPILER__main.2ecpp_unscanned_Debug /Users/anhelinamodenko/CLionProjects/HOTEL/Functionality/Rooms/RoomLux.cpp || cmake_object_order_depends_target_main.cpp
+  DEP_FILE = CMakeFiles/main.cpp.dir/Functionality/Rooms/RoomLux.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
-  OBJECT_DIR = CMakeFiles/HOTEL.dir
-  OBJECT_FILE_DIR = CMakeFiles/HOTEL.dir/Rooms
+  OBJECT_DIR = CMakeFiles/main.cpp.dir
+  OBJECT_FILE_DIR = CMakeFiles/main.cpp.dir/Functionality/Rooms
 
-build CMakeFiles/HOTEL.dir/Rooms/RoomLux.cpp.o: CXX_COMPILER__HOTEL_unscanned_Debug /Users/anhelinamodenko/CLionProjects/HOTEL/Rooms/RoomLux.cpp || cmake_object_order_depends_target_HOTEL
-  DEP_FILE = CMakeFiles/HOTEL.dir/Rooms/RoomLux.cpp.o.d
+build CMakeFiles/main.cpp.dir/Functionality/Hotel/Hotel.cpp.o: CXX_COMPILER__main.2ecpp_unscanned_Debug /Users/anhelinamodenko/CLionProjects/HOTEL/Functionality/Hotel/Hotel.cpp || cmake_object_order_depends_target_main.cpp
+  DEP_FILE = CMakeFiles/main.cpp.dir/Functionality/Hotel/Hotel.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
-  OBJECT_DIR = CMakeFiles/HOTEL.dir
-  OBJECT_FILE_DIR = CMakeFiles/HOTEL.dir/Rooms
+  OBJECT_DIR = CMakeFiles/main.cpp.dir
+  OBJECT_FILE_DIR = CMakeFiles/main.cpp.dir/Functionality/Hotel
 
-build CMakeFiles/HOTEL.dir/Hotel/Hotel.cpp.o: CXX_COMPILER__HOTEL_unscanned_Debug /Users/anhelinamodenko/CLionProjects/HOTEL/Hotel/Hotel.cpp || cmake_object_order_depends_target_HOTEL
-  DEP_FILE = CMakeFiles/HOTEL.dir/Hotel/Hotel.cpp.o.d
+build CMakeFiles/main.cpp.dir/Functionality/Reservation/Reservation.cpp.o: CXX_COMPILER__main.2ecpp_unscanned_Debug /Users/anhelinamodenko/CLionProjects/HOTEL/Functionality/Reservation/Reservation.cpp || cmake_object_order_depends_target_main.cpp
+  DEP_FILE = CMakeFiles/main.cpp.dir/Functionality/Reservation/Reservation.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
-  OBJECT_DIR = CMakeFiles/HOTEL.dir
-  OBJECT_FILE_DIR = CMakeFiles/HOTEL.dir/Hotel
+  OBJECT_DIR = CMakeFiles/main.cpp.dir
+  OBJECT_FILE_DIR = CMakeFiles/main.cpp.dir/Functionality/Reservation
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target HOTEL
+# Link build statements for EXECUTABLE target main.cpp
 
 
 #############################################
-# Link the executable HOTEL
+# Link the executable main.cpp
 
-build HOTEL: CXX_EXECUTABLE_LINKER__HOTEL_Debug CMakeFiles/HOTEL.dir/main.cpp.o CMakeFiles/HOTEL.dir/Rooms/Room.cpp.o CMakeFiles/HOTEL.dir/Date/Date.cpp.o CMakeFiles/HOTEL.dir/Rooms/RoomStandard.cpp.o CMakeFiles/HOTEL.dir/Rooms/RoomLux.cpp.o CMakeFiles/HOTEL.dir/Hotel/Hotel.cpp.o
+build main.cpp: CXX_EXECUTABLE_LINKER__main.2ecpp_Debug CMakeFiles/main.cpp.dir/Functionality/Rooms/Room.cpp.o CMakeFiles/main.cpp.dir/Functionality/Date/Date.cpp.o CMakeFiles/main.cpp.dir/Functionality/Rooms/RoomStandard.cpp.o CMakeFiles/main.cpp.dir/Functionality/Rooms/RoomLux.cpp.o CMakeFiles/main.cpp.dir/Functionality/Hotel/Hotel.cpp.o CMakeFiles/main.cpp.dir/Functionality/Reservation/Reservation.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk
-  OBJECT_DIR = CMakeFiles/HOTEL.dir
+  OBJECT_DIR = CMakeFiles/main.cpp.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = HOTEL
-  TARGET_PDB = HOTEL.dbg
+  TARGET_FILE = main.cpp
+  TARGET_PDB = main.cpp.dbg
 
 
 #############################################
@@ -135,7 +135,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Folder: /Users/anhelinamodenko/CLionProjects/HOTEL/cmake-build-debug
 
-build all: phony HOTEL
+build all: phony main.cpp
 
 # =============================================================================
 # Built-in targets

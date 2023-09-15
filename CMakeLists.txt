@@ -1,11 +1,13 @@
 cmake_minimum_required(VERSION 3.26)
-project(HOTEL)
+project(Functionality/Hotel)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(HOTEL main.cpp
-        Rooms/Room.cpp
-        Date/Date.cpp
-        Rooms/RoomStandard.cpp
-        Rooms/RoomLux.cpp
-        Hotel/Hotel.cpp)
+add_executable(main.cpp
+        Functionality/Rooms/Room.cpp
+        Functionality/Date/Date.cpp
+        Functionality/Rooms/RoomStandard.cpp
+        Functionality/Rooms/RoomLux.cpp
+        Functionality/Hotel/Hotel.cpp
+        Functionality/Reservation/Reservation.cpp
+)

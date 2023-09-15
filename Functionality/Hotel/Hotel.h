@@ -17,7 +17,6 @@ class RoomLux;
 class RoomStandard;
 
 class Hotel {
-
 public:
     Hotel();
     Hotel(const std::string& name);
@@ -28,7 +27,6 @@ public:
     Room findBestRoomByPrice(const Date& dateStart, const Date& dateEnd);
     void addReservation(Guest& guest, Room& room, const Date& date);
     void removeReservation(Guest& guest, Room& room);
-
 
 private:
     std::string name;
