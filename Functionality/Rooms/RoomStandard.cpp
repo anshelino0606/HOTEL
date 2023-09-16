@@ -72,4 +72,6 @@ bool RoomStandard::addReservation(Reservation *reservation) {
     Room::addReservation(reservation);
 }
 
-
+std::string RoomStandard::getClass() {
+    return "Standard";
+}

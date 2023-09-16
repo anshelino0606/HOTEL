@@ -15,12 +15,13 @@ class Reservation;
 class Room {
 
 public:
-
+    Room();
     Room(unsigned int noRooms,
         unsigned int roomArea,
         unsigned int maxCapacity,
         Reservation* reservations,
         unsigned int pricePerNight);
+
 
 
     // is number available at certain date for certain amount of people
@@ -35,6 +36,8 @@ public:
 
     // add reservation
     virtual bool addReservation(Reservation* reservation);
+
+    virtual std::string getClass();
 
     // comparison of price
     virtual bool operator<(const Room& other) const;
@@ -51,6 +54,7 @@ private:
     unsigned int maxCapacity;
     unsigned int pricePerNight;
     unsigned int numReservations;
+    unsigned int roomNumber;
     Reservation* reservations[MAX_NUMBER];
 };
 

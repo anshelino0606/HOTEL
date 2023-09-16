@@ -138,4 +138,6 @@ bool Room::addReservation(Reservation *reservation) {
     }
 }
 
-
+std::string Room::getClass() {
+    return "None";
+}

@@ -70,3 +70,7 @@ bool RoomLux::isCompliantWithStandard() const {
 bool RoomLux::addReservation(Reservation *reservation) {
     Room::addReservation(reservation);
 }
+
+std::string RoomLux::getClass() {
+    return "Lux";
+}
