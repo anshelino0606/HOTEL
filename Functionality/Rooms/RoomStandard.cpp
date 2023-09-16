@@ -4,8 +4,8 @@
 
 #include "RoomStandard.h"
 
-RoomStandard::RoomStandard(unsigned int noRooms, unsigned int roomArea, unsigned int maxCapacity, Date *datesBooked,
-                           unsigned int pricePerNight) : Room(1, roomArea, maxCapacity, datesBooked,
+RoomStandard::RoomStandard(unsigned int noRooms, unsigned int roomArea, unsigned int maxCapacity, Reservation* reservations,
+                           unsigned int pricePerNight) : Room(1, roomArea, maxCapacity, reservations,
                                                               pricePerNight) {
 
 }
@@ -66,6 +66,10 @@ bool RoomStandard::addAmenity(const std::string &amenity) {
     // If the amenity is not a duplicate, add it to the list
     amenities.push_back(amenity);
     return true; // Amenity added successfully
+}
+
+bool RoomStandard::addReservation(Reservation *reservation) {
+    Room::addReservation(reservation);
 }
 
 

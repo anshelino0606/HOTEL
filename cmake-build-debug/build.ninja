@@ -85,6 +85,12 @@ build CMakeFiles/main.cpp.dir/Functionality/Reservation/Reservation.cpp.o: CXX_C
   OBJECT_DIR = CMakeFiles/main.cpp.dir
   OBJECT_FILE_DIR = CMakeFiles/main.cpp.dir/Functionality/Reservation
 
+build CMakeFiles/main.cpp.dir/main.cpp.o: CXX_COMPILER__main.2ecpp_unscanned_Debug /Users/anhelinamodenko/CLionProjects/HOTEL/main.cpp || cmake_object_order_depends_target_main.cpp
+  DEP_FILE = CMakeFiles/main.cpp.dir/main.cpp.o.d
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/main.cpp.dir
+  OBJECT_FILE_DIR = CMakeFiles/main.cpp.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target main.cpp
@@ -93,7 +99,7 @@ build CMakeFiles/main.cpp.dir/Functionality/Reservation/Reservation.cpp.o: CXX_C
 #############################################
 # Link the executable main.cpp
 
-build main.cpp: CXX_EXECUTABLE_LINKER__main.2ecpp_Debug CMakeFiles/main.cpp.dir/Functionality/Rooms/Room.cpp.o CMakeFiles/main.cpp.dir/Functionality/Date/Date.cpp.o CMakeFiles/main.cpp.dir/Functionality/Rooms/RoomStandard.cpp.o CMakeFiles/main.cpp.dir/Functionality/Rooms/RoomLux.cpp.o CMakeFiles/main.cpp.dir/Functionality/Hotel/Hotel.cpp.o CMakeFiles/main.cpp.dir/Functionality/Reservation/Reservation.cpp.o
+build main.cpp: CXX_EXECUTABLE_LINKER__main.2ecpp_Debug CMakeFiles/main.cpp.dir/Functionality/Rooms/Room.cpp.o CMakeFiles/main.cpp.dir/Functionality/Date/Date.cpp.o CMakeFiles/main.cpp.dir/Functionality/Rooms/RoomStandard.cpp.o CMakeFiles/main.cpp.dir/Functionality/Rooms/RoomLux.cpp.o CMakeFiles/main.cpp.dir/Functionality/Hotel/Hotel.cpp.o CMakeFiles/main.cpp.dir/Functionality/Reservation/Reservation.cpp.o CMakeFiles/main.cpp.dir/main.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk
   OBJECT_DIR = CMakeFiles/main.cpp.dir
   POST_BUILD = :

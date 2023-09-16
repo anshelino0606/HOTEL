@@ -10,4 +10,5 @@ add_executable(main.cpp
         Functionality/Rooms/RoomLux.cpp
         Functionality/Hotel/Hotel.cpp
         Functionality/Reservation/Reservation.cpp
+        main.cpp
 )

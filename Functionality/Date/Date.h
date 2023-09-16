@@ -15,11 +15,23 @@ public:
     int getDay() const;
 
 
+    bool operator<(const Date& other) const;
+    bool operator>(const Date& other) const;
+    bool operator<=(const Date& other) const;
+    bool operator>=(const Date& other) const;
+    bool operator==(const Date& other) const;
+    bool operator!=(const Date& other) const;
+
 private:
     int year;
     int month;
     int day;
 };
+
+
+
+
+
 
 
 #endif //HOTEL_DATE_H

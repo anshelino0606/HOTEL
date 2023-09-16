@@ -4,10 +4,12 @@
 
 #include "Room.h"
 
-Room::Room(unsigned int noRooms, unsigned int roomArea, unsigned int maxCapacity, Date *datesBooked,
+Room::Room(unsigned int noRooms, unsigned int roomArea, unsigned int maxCapacity, Reservation *reservations,
            unsigned int pricePerNight)
-           : noRooms(noRooms), roomArea(roomArea), pricePerNight(pricePerNight), datesBooked(nullptr), maxCapacity(maxCapacity) {
-
+           : noRooms(noRooms), roomArea(roomArea), pricePerNight(pricePerNight), maxCapacity(maxCapacity) {
+    for (unsigned int i = 0; i < noRooms; ++i) {
+        this->reservations[i] = &reservations[i];
+    }
 }
 
 bool Room::isDateInRange(const Date& date, const Date& rangeStart, const Date& rangeEnd) {
@@ -33,7 +35,7 @@ bool Room::isDateInRange(const Date& date, const Date& rangeStart, const Date& r
 
 bool Room::isNumberAvailableAt(const Date& dateStart, const Date& dateEnd, unsigned int number) {
     // Check if datesBooked is nullptr or no rooms are available
-    if (!datesBooked || noRooms == 0) {
+    if (noRooms == 0) {
         return false; // No rooms are available
     }
 
@@ -44,8 +46,12 @@ bool Room::isNumberAvailableAt(const Date& dateStart, const Date& dateEnd, unsig
 
     // Iterate through the booked dates
     for (unsigned int i = 0; i < noRooms; ++i) {
-        // Check if the booked date falls within the specified date range
-        if (isDateInRange(datesBooked[i], dateStart, dateEnd)) {
+        // Get the start and end dates of the reservation
+        const Date& reservationStartDate = reservations[i]->getDateStart();
+        const Date& reservationEndDate = reservations[i]->getDateEnd();
+
+        // Check if the reservation overlaps with the specified date range
+        if (dateStart <= reservationEndDate && dateEnd >= reservationStartDate) {
             return false; // Room is not available for the specified dates
         }
     }
@@ -74,12 +80,16 @@ unsigned int Room::calculateCost(const Date& dateStart, const Date& dateEnd) {
 }
 
 unsigned int Room::calculateNumberOfDays(const Date& dateStart, const Date& dateEnd) {
-    unsigned int numDays = (dateEnd.getYear() - dateStart.getYear()) * 365 +
-                           (dateEnd.getMonth() - dateStart.getMonth()) * 30 +
-                           (dateEnd.getDay() - dateStart.getDay());
-
-    return numDays;
+    unsigned int totalDays = 0;
+    for (const Reservation* reservation : reservations) {
+        if (reservation) {
+            // Calculate the duration of each reservation and add it to the total
+            totalDays += reservation->getDurationInDays();
+        }
+    }
+    return totalDays;
 }
+
 
 bool Room::operator<(const Room &other) const {
     return pricePerNight < other.pricePerNight;
@@ -103,6 +113,29 @@ bool Room::operator==(const Room &other) const {
 
 bool Room::operator!=(const Room &other) const {
     return pricePerNight != other.pricePerNight;
+}
+
+bool Room::addReservation(Reservation *reservation) {
+    if (numReservations < MAX_NUMBER) {
+        // Check if the new reservation conflicts with existing reservations
+        bool hasConflict = false;
+        for (unsigned int i = 0; i < numReservations; ++i) {
+            const Date& existingStart = reservations[i]->getDateStart();
+            const Date& existingEnd = reservations[i]->getDateEnd();
+            const Date& newStart = reservation->getDateStart();
+            const Date& newEnd = reservation->getDateEnd();
+
+            // Check for date range overlap
+            if (newStart <= existingEnd && newEnd >= existingStart) {
+                hasConflict = true;
+                break; // There's a conflict; no need to check further
+            }
+        }
+
+        if (!hasConflict) {
+            reservations[numReservations++] = reservation;
+        }
+    }
 }
 
 

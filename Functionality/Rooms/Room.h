@@ -6,6 +6,11 @@
 #define HOTEL_ROOM_H
 
 #include "../Date/Date.h"
+#include "../Reservation/Reservation.h"
+
+static const unsigned int MAX_NUMBER = 100;
+
+class Reservation;
 
 class Room {
 
@@ -14,7 +19,7 @@ public:
     Room(unsigned int noRooms,
         unsigned int roomArea,
         unsigned int maxCapacity,
-        Date* datesBooked,
+        Reservation* reservations,
         unsigned int pricePerNight);
 
 
@@ -27,6 +32,9 @@ public:
 
     // number of days for booked room
     virtual unsigned int calculateNumberOfDays(const Date& dateStart, const Date& dateEnd);
+
+    // add reservation
+    virtual bool addReservation(Reservation* reservation);
 
     // comparison of price
     virtual bool operator<(const Room& other) const;
@@ -41,8 +49,9 @@ private:
     unsigned int noRooms;
     unsigned int roomArea;
     unsigned int maxCapacity;
-    Date* datesBooked;
     unsigned int pricePerNight;
+    unsigned int numReservations;
+    Reservation* reservations[MAX_NUMBER];
 };
 
 

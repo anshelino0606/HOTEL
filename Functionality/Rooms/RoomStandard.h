@@ -14,7 +14,7 @@ public:
     RoomStandard(unsigned int noRooms,
          unsigned int roomArea,
          unsigned int maxCapacity,
-         Date* datesBooked,
+         Reservation* reservations,
          unsigned int pricePerNight);
 
 
@@ -30,6 +30,9 @@ public:
     // add comfortability
     bool addAmenity(const std::string& amenity);
 
+    // add reservation
+    bool addReservation(Reservation* reservation) override;
+
     // comparison of price
     bool operator<(const Room& other) const override;
     bool operator>(const Room& other) const override;
@@ -43,9 +46,9 @@ private:
     unsigned int noRooms;
     unsigned int roomArea;
     unsigned int maxCapacity;
-    Date* datesBooked;
     unsigned int pricePerNight;
     std::vector<std::string> amenities;
+    Reservation* reservations;
 };
 
 

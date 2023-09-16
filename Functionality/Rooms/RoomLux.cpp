@@ -4,8 +4,8 @@
 
 #include "RoomLux.h"
 
-RoomLux::RoomLux(unsigned int noRooms, unsigned int roomArea, unsigned int maxCapacity, Date *datesBooked,
-                           unsigned int pricePerNight) : Room(noRooms, roomArea, maxCapacity, datesBooked,
+RoomLux::RoomLux(unsigned int noRooms, unsigned int roomArea, unsigned int maxCapacity, Reservation *reservations,
+                           unsigned int pricePerNight) : Room(noRooms, roomArea, maxCapacity, reservations,
                                                               pricePerNight) {
 
 }
@@ -65,4 +65,8 @@ bool RoomLux::isCompliantWithStandard() const {
         default:
             return false; // Unknown standard, not compliant
     }
+}
+
+bool RoomLux::addReservation(Reservation *reservation) {
+    Room::addReservation(reservation);
 }

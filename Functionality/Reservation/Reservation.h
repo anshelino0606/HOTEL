@@ -8,24 +8,27 @@
 #include "../Rooms/Room.h"
 #include "../Guest/Guest.h"
 
+#include <string>
+
 class Room;
 
 class Reservation {
 public:
 
-    Reservation(Room* room, const Date& date, const unsigned int userID);
+    Reservation(Room* room, const Date& dateStart, const Date& dateEnd, const unsigned int& userID);
 
     static unsigned int costPerStay;
 
-    Room* getRoom() const;
-    Date getDate() const;
-    std::string getGuestName() const;
+    const Room* getRoom() const;
+    Date getDateStart() const;
+    Date getDateEnd() const;
+    unsigned int getGuestID() const;
 
     unsigned int getDurationInDays() const;
 
     // Check-in and check-out operations
-    void checkIn();
-    void checkOut();
+//    void checkIn();
+//    void checkOut();
 
     // Update reservation details (room or date)
     void updateReservation(Room* newRoom, const Date& newDateStart, const Date& newDateEnd);
@@ -34,28 +37,32 @@ public:
     void cancelReservation();
 
     // Generate a confirmation or receipt
-    std::string generateConfirmation() const;
+//    std::string generateConfirmation() const;
 
     // Validate the reservation (e.g., check for conflicts with other reservations)
     bool isValid() const;
 
     // Export reservation data (e.g., to a file or email)
-    void exportData() const;
+//    void exportData() const;
 
-    // Process payment for the reservation
-//    void processPayment();
+    /*
+     * // Process payment for the reservation
+     * void processPayment();
 
-    // Send notification to the guest
-//    void sendNotification(const std::string& message);
+     * // Send notification to the guest
+     * void sendNotification(const std::string& message);
 
-    // Leave a review or rating
-//    void leaveReview(const std::string& review);
+     * // Leave a review or rating
+     * void leaveReview(const std::string& review);
+
+     */
 
 private:
-    Room room;
-    Date date;
+    Room* room;
+    Date dateStart;
+    Date dateEnd;
     unsigned int userID;
-
+    bool isCheckedIn;
 };
 
 
