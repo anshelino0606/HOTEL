@@ -9,8 +9,9 @@
 Room::Room(unsigned int noRooms, unsigned int roomArea, unsigned int maxCapacity, Reservation *reservations,
            unsigned int pricePerNight)
            : noRooms(noRooms), roomArea(roomArea), pricePerNight(pricePerNight), maxCapacity(maxCapacity) {
+
     for (unsigned int i = 0; i < noRooms; ++i) {
-        this->reservations[i] = &reservations[i];
+        this->reservations[i] = reservations[i];
     }
 }
 
@@ -49,8 +50,8 @@ bool Room::isNumberAvailableAt(const Date& dateStart, const Date& dateEnd, unsig
     // Iterate through the booked dates
     for (unsigned int i = 0; i < noRooms; ++i) {
         // Get the start and end dates of the reservation
-        const Date& reservationStartDate = reservations[i]->getDateStart();
-        const Date& reservationEndDate = reservations[i]->getDateEnd();
+        const Date& reservationStartDate = reservations[i].getDateStart();
+        const Date& reservationEndDate = reservations[i].getDateEnd();
 
         // Check if the reservation overlaps with the specified date range
         if (dateStart <= reservationEndDate && dateEnd >= reservationStartDate) {
@@ -83,7 +84,7 @@ unsigned int Room::calculateCost(const Date& dateStart, const Date& dateEnd) {
 
 unsigned int Room::calculateNumberOfDays(const Date& dateStart, const Date& dateEnd) {
     unsigned int totalDays = 0;
-    for (const Reservation* reservation : reservations) {
+    for (const Reservation* reservation : this->reservations) {
         if (reservation) {
             // Calculate the duration of each reservation and add it to the total
             totalDays += reservation->getDurationInDays();
@@ -122,8 +123,8 @@ bool Room::addReservation(Reservation *reservation) {
         // Check if the new reservation conflicts with existing reservations
         bool hasConflict = false;
         for (unsigned int i = 0; i < numReservations; ++i) {
-            const Date& existingStart = reservations[i]->getDateStart();
-            const Date& existingEnd = reservations[i]->getDateEnd();
+            const Date& existingStart = reservations[i].getDateStart();
+            const Date& existingEnd = reservations[i].getDateEnd();
             const Date& newStart = reservation->getDateStart();
             const Date& newEnd = reservation->getDateEnd();
 
@@ -145,12 +146,12 @@ std::string Room::getClass() {
 }
 
 
-Room::Room(unsigned int noRooms, unsigned int roomArea, unsigned int maxCapacity, Date *datesBooked,
+Room::Room(unsigned int noRooms, unsigned int roomArea, unsigned int maxCapacity, Reservation *reservations,
            unsigned int pricePerNight)
-        : noRooms(noRooms), roomArea(roomArea), pricePerNight(pricePerNight), datesBooked(nullptr), maxCapacity(maxCapacity) {
-    this->datesBooked = new Date[noRooms];
+        : noRooms(noRooms), roomArea(roomArea), pricePerNight(pricePerNight), maxCapacity(maxCapacity) {
+    this->reservations = new Reservation[noRooms];
     for (unsigned int i = 0; i < noRooms; ++i) {
-        this->datesBooked[i] = datesBooked[i];
+        this->reservations[i] = new Reservation();
     }
 }
 
@@ -180,13 +181,13 @@ bool isDateInRange(const Date& date, const Date& rangeStart, const Date& rangeEn
 Room::Room(const Room &other)
         : noRooms(other.noRooms), roomArea(other.roomArea),
           maxCapacity(other.maxCapacity), pricePerNight(other.pricePerNight) {
-    if (other.datesBooked != nullptr) {
-        datesBooked = new Date[noRooms];
-        std::copy(other.datesBooked, other.datesBooked + noRooms, datesBooked);
+    if (other.reservations != nullptr) {
+        reservations = new Reservation[noRooms];
+        std::copy(other.reservations, other.reservations + noRooms, reservations);
     }
 }
 
-Room::Room(Room&& other) noexcept : noRooms(0), roomArea(0), maxCapacity(0), datesBooked(nullptr), pricePerNight(0) {
+Room::Room(Room&& other) noexcept : noRooms(0), roomArea(0), maxCapacity(0), reservations(nullptr), pricePerNight(0) {
     swap(*this, other);
 }
 
@@ -195,13 +196,13 @@ void swap(Room &first, Room &second) noexcept {
     swap(first.noRooms, second.noRooms);
     swap(first.roomArea, second.roomArea);
     swap(first.maxCapacity, second.maxCapacity);
-    swap(first.datesBooked, second.datesBooked);
+    swap(first.reservations, second.reservations);
     swap(first.pricePerNight, second.pricePerNight);
 
 }
 
 Room::~Room() {
-    delete[] datesBooked;
+    delete[] reservations;
 }
 
 Room::Room(unsigned int noRooms, unsigned int roomArea, unsigned int maxCapacity, unsigned int pricePerNight)
@@ -231,7 +232,7 @@ std::ostream &operator<<(std::ostream &os, const Room &room) {
     os << "Price per Night: $" << room.pricePerNight << "\n";
     os << "Dates Booked: ";
     for (unsigned int i = 0; i < room.noRooms; ++i) {
-        os << room.datesBooked[i];
+        os << room.reservations[i];
         if (i < room.noRooms - 1) {
             os << ", ";
         }
@@ -247,9 +248,9 @@ std::istream &operator>>(std::istream &is, Room &room) {
     // Read datesBooked (assuming date format "YYYY-MM-DD, YYYY-MM-DD, ...")
     char comma;
     is >> comma; // Read the comma after pricePerNight
-    room.datesBooked = new Date[room.noRooms];
+    room.reservations = new Reservation[room.noRooms];
     for (unsigned int i = 0; i < room.noRooms; ++i) {
-        is >> room.datesBooked[i];
+        is >> room.reservations[i];
         if (i < room.noRooms - 1) {
             is >> comma;
         }
@@ -269,4 +270,4 @@ void Room::loadFromFile(const std::string &fileName) {
 }
 
 Room::Room()
-        : noRooms(0), roomArea(0), maxCapacity(0), datesBooked(nullptr), pricePerNight(0) {}
+        : noRooms(0), roomArea(0), maxCapacity(0), reservations(nullptr), pricePerNight(0) {}

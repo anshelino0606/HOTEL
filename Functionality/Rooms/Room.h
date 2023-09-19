@@ -26,7 +26,7 @@ public:
     Room(unsigned int noRooms,
          unsigned int roomArea,
          unsigned int maxCapacity,
-         Date* datesBooked,
+         Reservation* reservations,
          unsigned int pricePerNight);
 
     Room(const Room& other);
@@ -80,7 +80,7 @@ private:
     unsigned int pricePerNight;
     unsigned int numReservations;
     unsigned int roomNumber;
-    Reservation* reservations[MAX_NUMBER];
+    Reservation* reservations;
 };
 
 

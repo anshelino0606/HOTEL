@@ -78,3 +78,36 @@ void Date::loadFromFile(const std::string &fileName) {
 
     file >> *this;
 }
+
+bool Date::operator<(const Date &other) const {
+    if (year < other.year)
+        return true;
+    else if (year == other.year) {
+        if (month < other.month)
+            return true;
+        else if (month == other.month) {
+            return day < other.day;
+        }
+    }
+    return false;
+}
+
+bool Date::operator>(const Date &other) const {
+    return other < *this;
+}
+
+bool Date::operator<=(const Date &other) const {
+    return !(*this < other);
+}
+
+bool Date::operator>=(const Date &other) const {
+    return !(*this > other);
+}
+
+bool Date::operator==(const Date &other) const {
+    return year == other.year && month == other.month && day == other.day;
+}
+
+bool Date::operator!=(const Date &other) const {
+    return !(*this == other);
+}

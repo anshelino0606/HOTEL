@@ -15,7 +15,52 @@ class Room;
 class Reservation {
 public:
 
-    Reservation(Room* room, const Date& dateStart, const Date& dateEnd, const unsigned int& userID);
+    Reservation()
+            : room(nullptr), dateStart(Date(0, 0, 0)), dateEnd(Date(0, 0, 0)), userID(0), isCheckedIn(false),
+              cost(0), numGuests(0), confirmationCode(""), specialRequests("") {}
+
+    Reservation(Room* room, const Date& dateStart, const Date& dateEnd, unsigned int userID)
+            : room(room), dateStart(dateStart), dateEnd(dateEnd), userID(userID), isCheckedIn(false),
+              cost(0), numGuests(0), confirmationCode(""), specialRequests("") {}
+
+    Reservation(Room* room, const Date& dateStart, const Date& dateEnd, unsigned int userID,
+                bool isCheckedIn, unsigned int cost, unsigned int numGuests,
+                const std::string& confirmationCode, const std::string& specialRequests)
+            : room(room), dateStart(dateStart), dateEnd(dateEnd), userID(userID), isCheckedIn(isCheckedIn),
+              cost(cost), numGuests(numGuests), confirmationCode(confirmationCode),
+              specialRequests(specialRequests) {}
+
+    Reservation(const Reservation& other) {
+        // Perform a deep copy of all member variables
+        this->room = other.room;
+        this->dateStart = other.dateStart;
+        this->dateEnd = other.dateEnd;
+        this->userID = other.userID;
+        this->isCheckedIn = other.isCheckedIn;
+        this->cost = other.cost;
+        this->numGuests = other.numGuests;
+        this->confirmationCode = other.confirmationCode;
+        this->specialRequests = other.specialRequests;
+    }
+
+    Reservation& operator=(const Reservation& other) {
+        if (this == &other) {
+            return *this; // Self-assignment, no action needed
+        }
+
+        // Perform deep copy of Reservation members
+        this->room = other.room;
+        this->dateStart = other.dateStart;
+        this->dateEnd = other.dateEnd;
+        this->userID = other.userID;
+        this->isCheckedIn = other.isCheckedIn;
+        this->cost = other.cost;
+        this->numGuests = other.numGuests;
+        this->confirmationCode = other.confirmationCode;
+        this->specialRequests = other.specialRequests;
+
+        return *this;
+    }
 
     static unsigned int costPerStay;
 
@@ -63,6 +108,12 @@ private:
     Date dateEnd;
     unsigned int userID;
     bool isCheckedIn;
+
+    // Additional details
+    unsigned int cost;
+    unsigned int numGuests;
+    std::string confirmationCode;
+    std::string specialRequests;
 };
 
 
