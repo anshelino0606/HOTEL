@@ -3,6 +3,8 @@
 //
 
 #include "Room.h"
+#include <fstream>
+#include <iostream>
 
 Room::Room(unsigned int noRooms, unsigned int roomArea, unsigned int maxCapacity, Reservation *reservations,
            unsigned int pricePerNight)
@@ -141,3 +143,130 @@ bool Room::addReservation(Reservation *reservation) {
 std::string Room::getClass() {
     return "None";
 }
+
+
+Room::Room(unsigned int noRooms, unsigned int roomArea, unsigned int maxCapacity, Date *datesBooked,
+           unsigned int pricePerNight)
+        : noRooms(noRooms), roomArea(roomArea), pricePerNight(pricePerNight), datesBooked(nullptr), maxCapacity(maxCapacity) {
+    this->datesBooked = new Date[noRooms];
+    for (unsigned int i = 0; i < noRooms; ++i) {
+        this->datesBooked[i] = datesBooked[i];
+    }
+}
+
+bool isDateInRange(const Date& date, const Date& rangeStart, const Date& rangeEnd) {
+    // Compare year, month, and day of the dates to check if date is in range
+    if (date.getYear() > rangeEnd.getYear() || date.getYear() < rangeStart.getYear())
+        return false;
+
+    if (date.getYear() == rangeEnd.getYear() && date.getMonth() > rangeEnd.getMonth())
+        return false;
+
+    if (date.getYear() == rangeStart.getYear() && date.getMonth() < rangeStart.getMonth())
+        return false;
+
+    if (date.getYear() == rangeEnd.getYear() && date.getMonth() == rangeEnd.getMonth() && date.getDay() > rangeEnd.getDay())
+        return false;
+
+    if (date.getYear() == rangeStart.getYear() && date.getMonth() == rangeStart.getMonth() && date.getDay() < rangeStart.getDay())
+        return false;
+
+    return true;
+}
+
+
+
+
+Room::Room(const Room &other)
+        : noRooms(other.noRooms), roomArea(other.roomArea),
+          maxCapacity(other.maxCapacity), pricePerNight(other.pricePerNight) {
+    if (other.datesBooked != nullptr) {
+        datesBooked = new Date[noRooms];
+        std::copy(other.datesBooked, other.datesBooked + noRooms, datesBooked);
+    }
+}
+
+Room::Room(Room&& other) noexcept : noRooms(0), roomArea(0), maxCapacity(0), datesBooked(nullptr), pricePerNight(0) {
+    swap(*this, other);
+}
+
+void swap(Room &first, Room &second) noexcept {
+    using std::swap;
+    swap(first.noRooms, second.noRooms);
+    swap(first.roomArea, second.roomArea);
+    swap(first.maxCapacity, second.maxCapacity);
+    swap(first.datesBooked, second.datesBooked);
+    swap(first.pricePerNight, second.pricePerNight);
+
+}
+
+Room::~Room() {
+    delete[] datesBooked;
+}
+
+Room::Room(unsigned int noRooms, unsigned int roomArea, unsigned int maxCapacity, unsigned int pricePerNight)
+        : noRooms(noRooms), roomArea(roomArea), maxCapacity(maxCapacity), pricePerNight(pricePerNight), datesBooked(nullptr) {}
+
+unsigned int Room::getNoRooms() const {
+    return noRooms;
+}
+
+unsigned int Room::getRoomArea() const {
+    return roomArea;
+}
+
+
+unsigned int Room::getMaxCapacity() const {
+    return maxCapacity;
+}
+
+unsigned int Room::getPricePerNight() const {
+    return pricePerNight;
+}
+
+std::ostream &operator<<(std::ostream &os, const Room &room) {
+    os << "No. of Rooms: " << room.noRooms << "\n";
+    os << "Room Area: " << room.roomArea << " sq. ft.\n";
+    os << "Max Capacity: " << room.maxCapacity << " people\n";
+    os << "Price per Night: $" << room.pricePerNight << "\n";
+    os << "Dates Booked: ";
+    for (unsigned int i = 0; i < room.noRooms; ++i) {
+        os << room.datesBooked[i];
+        if (i < room.noRooms - 1) {
+            os << ", ";
+        }
+    }
+    os << "\n";
+    return os;
+}
+
+std::istream &operator>>(std::istream &is, Room &room) {
+    // Read room properties from the input stream, e.g., noRooms, roomArea, maxCapacity, pricePerNight
+    is >> room.noRooms >> room.roomArea >> room.maxCapacity >> room.pricePerNight;
+
+    // Read datesBooked (assuming date format "YYYY-MM-DD, YYYY-MM-DD, ...")
+    char comma;
+    is >> comma; // Read the comma after pricePerNight
+    room.datesBooked = new Date[room.noRooms];
+    for (unsigned int i = 0; i < room.noRooms; ++i) {
+        is >> room.datesBooked[i];
+        if (i < room.noRooms - 1) {
+            is >> comma;
+        }
+    }
+
+    return is;
+}
+
+void Room::loadFromFile(const std::string &fileName) {
+    std::ifstream file(fileName);
+    if (!file) {
+        std::cerr << "FILE DID NOT OPEN: " << fileName << std::endl;
+        return;
+    }
+
+    file >> *this;
+}
+
+Room::Room()
+        : noRooms(0), roomArea(0), maxCapacity(0), datesBooked(nullptr), pricePerNight(0) {}
