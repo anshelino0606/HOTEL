@@ -41,7 +41,6 @@ void Hotel::loadFromFile(const std::string &filename)  {
             // Variables to store CSV values
             unsigned int noRooms, roomArea, maxCapacity, pricePerNight;
 
-            // Read comma-separated values
             if (std::getline(iss, token, ',')) {
                 noRooms = std::stoi(token);
             }
