@@ -20,7 +20,6 @@ public:
     Room(unsigned int noRooms,
         unsigned int roomArea,
         unsigned int maxCapacity,
-        Reservation* reservations,
         unsigned int pricePerNight);
 
     Room(unsigned int noRooms,
@@ -58,6 +57,9 @@ public:
     virtual bool operator==(const Room& other) const;
     virtual bool operator!=(const Room& other) const;
 
+    // overload operator =
+    virtual Room& operator=(const Room& other);
+
     // operators of streams
     friend std::ostream& operator<<(std::ostream& os, const Room& room);
     friend std::istream& operator>>(std::istream& is, Room& room);
@@ -70,8 +72,10 @@ public:
     virtual unsigned int getRoomArea() const;
     virtual unsigned int getMaxCapacity() const;
     virtual unsigned int getPricePerNight() const;
+    virtual unsigned int getRoomNumber() const;
 
     virtual ~Room();
+
 
 private:
     unsigned int noRooms;

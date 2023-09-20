@@ -84,14 +84,12 @@ unsigned int Room::calculateCost(const Date& dateStart, const Date& dateEnd) {
 
 unsigned int Room::calculateNumberOfDays(const Date& dateStart, const Date& dateEnd) {
     unsigned int totalDays = 0;
-    for (const Reservation* reservation : this->reservations) {
-        if (reservation) {
-            // Calculate the duration of each reservation and add it to the total
-            totalDays += reservation->getDurationInDays();
-        }
+    for (unsigned int i = 0; i < this->noRooms; ++i) {
+        totalDays += this->reservations[i].getDurationInDays();
     }
     return totalDays;
 }
+
 
 
 bool Room::operator<(const Room &other) const {
@@ -118,6 +116,23 @@ bool Room::operator!=(const Room &other) const {
     return pricePerNight != other.pricePerNight;
 }
 
+Room &Room::operator=(const Room &other) {
+    if (this == &other) {
+        return *this;
+    }
+
+    this->pricePerNight = other.pricePerNight;
+    this->reservations = other.reservations;
+    this->noRooms = other.noRooms;
+    this->maxCapacity = other.maxCapacity;
+    this->roomArea = other.roomArea;
+    this->numReservations = other.numReservations;
+    this->roomNumber = other.roomNumber;
+
+    return *this;
+}
+
+
 bool Room::addReservation(Reservation *reservation) {
     if (numReservations < MAX_NUMBER) {
         // Check if the new reservation conflicts with existing reservations
@@ -136,7 +151,7 @@ bool Room::addReservation(Reservation *reservation) {
         }
 
         if (!hasConflict) {
-            reservations[numReservations++] = reservation;
+            reservations[numReservations++] = *reservation;
         }
     }
 }
@@ -145,15 +160,6 @@ std::string Room::getClass() {
     return "None";
 }
 
-
-Room::Room(unsigned int noRooms, unsigned int roomArea, unsigned int maxCapacity, Reservation *reservations,
-           unsigned int pricePerNight)
-        : noRooms(noRooms), roomArea(roomArea), pricePerNight(pricePerNight), maxCapacity(maxCapacity) {
-    this->reservations = new Reservation[noRooms];
-    for (unsigned int i = 0; i < noRooms; ++i) {
-        this->reservations[i] = new Reservation();
-    }
-}
 
 bool isDateInRange(const Date& date, const Date& rangeStart, const Date& rangeEnd) {
     // Compare year, month, and day of the dates to check if date is in range
@@ -174,8 +180,6 @@ bool isDateInRange(const Date& date, const Date& rangeStart, const Date& rangeEn
 
     return true;
 }
-
-
 
 
 Room::Room(const Room &other)
@@ -206,7 +210,7 @@ Room::~Room() {
 }
 
 Room::Room(unsigned int noRooms, unsigned int roomArea, unsigned int maxCapacity, unsigned int pricePerNight)
-        : noRooms(noRooms), roomArea(roomArea), maxCapacity(maxCapacity), pricePerNight(pricePerNight), datesBooked(nullptr) {}
+        : noRooms(noRooms), roomArea(roomArea), maxCapacity(maxCapacity), pricePerNight(pricePerNight), reservations(nullptr) {}
 
 unsigned int Room::getNoRooms() const {
     return noRooms;
@@ -271,3 +275,8 @@ void Room::loadFromFile(const std::string &fileName) {
 
 Room::Room()
         : noRooms(0), roomArea(0), maxCapacity(0), reservations(nullptr), pricePerNight(0) {}
+
+
+unsigned int Room::getRoomNumber() const {
+    return roomNumber;
+}

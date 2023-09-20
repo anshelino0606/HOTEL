@@ -37,7 +37,7 @@ public:
     // add reservation
     bool addReservation(Reservation* reservation) override;
 
-    std::string getClass();
+    std::string getClass() override;
 
     // comparison of price
     bool operator<(const Room& other) const override;

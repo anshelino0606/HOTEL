@@ -25,7 +25,7 @@ public:
     Room* findAvailableRooms(const Date& dateStart, const Date& dateEnd, unsigned int capacity);
     void displayRoomsByClass(std::string roomClass);
     Room findBestRoomByPrice(const Date& dateStart, const Date& dateEnd, unsigned int capacity);
-    void addReservation(Guest& guest, Room& room, , const Date& dateStart, const Date& dateEnd, unsigned int capacity);
+    void addReservation(Guest& guest, Room& room, const Date& dateStart, const Date& dateEnd, unsigned int capacity);
     void removeReservation(Guest& guest, Room& room);
 
 private:

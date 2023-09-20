@@ -43,10 +43,8 @@ public:
     bool operator==(const Date& other) const;
     bool operator!=(const Date& other) const;
 
-
     // Destructor
     ~Date() = default;
-
 
     int getYear() const;
     int getMonth() const;
