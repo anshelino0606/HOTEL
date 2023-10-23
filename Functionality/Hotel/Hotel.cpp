@@ -172,3 +172,11 @@ Hotel& Hotel::operator=(const Hotel& other) {
     }
     return *this;
 }
+
+Hotel::Hotel() {
+    name = "";
+    rooms = new Room[3];
+    for (int i = 0; i < 3; i++) {
+        rooms[i] = Room();
+    }
+}
