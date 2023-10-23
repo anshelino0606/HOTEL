@@ -28,8 +28,29 @@ public:
     void addReservation(Guest& guest, Room& room, const Date& dateStart, const Date& dateEnd, unsigned int capacity);
     void removeReservation(Guest& guest, Room& room);
 
-private:
+    /*
+     * Overload operators
+     */
+
+    // comparison of price
+    bool operator<(const Hotel& other) const;
+    bool operator>(const Hotel& other) const;
+    bool operator>=(const Hotel& other) const;
+    bool operator<=(const Hotel& other) const;
+    bool operator==(const Hotel& other) const;
+    bool operator!=(const Hotel& other) const;
+
+    // overload operator =
+    Hotel& operator=(const Hotel& other);
+
+    // overload streams
+    friend std::ostream& operator<<(std::ostream& os, const Hotel& hotel);
+    friend std::ostream& operator>>(std::ostream& is, const Hotel& hotel);
+
+
+
     std::string name;
+private:
     Room* rooms;
 };
 
