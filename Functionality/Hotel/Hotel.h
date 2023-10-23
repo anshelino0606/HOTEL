@@ -45,12 +45,11 @@ public:
 
     // overload streams
     friend std::ostream& operator<<(std::ostream& os, const Hotel& hotel);
-    friend std::ostream& operator>>(std::ostream& is, const Hotel& hotel);
+    friend std::istream& operator>>(std::ostream& is, const Hotel& hotel);
 
 
 
     std::string name;
-private:
     Room* rooms;
 };
 

@@ -115,10 +115,60 @@ void Hotel::addReservation(Guest& guest, Room& room, const Date& dateStart, cons
     }
 }
 
+Hotel::Hotel(const std::string &name) {
+    this->name = name;
+    rooms = new Room[3];
+    for (int i = 0; i < 3; i++) {
+        rooms[i] = Room();
+    }
+}
 
 
+std::ostream& operator<<(std::ostream& os, const Hotel& hotel) {
+    os << "Hotel: " << hotel.name << std::endl;
+    os << "Rooms: " << std::endl;
+    for (int i = 0; i < MAX_NUMBER; i++) {
+        os << hotel.rooms[i] << std::endl;
+    }
+    return os;
+}
 
+std::istream& operator>>(std::istream& is, Hotel& hotel) {
+    is >> hotel.name;
+    for (int i = 0; i < MAX_NUMBER; i++) {
+        is >> hotel.rooms[i];
+    }
+    return is;
+}
 
+bool Hotel::operator<(const Hotel& other) const {
+    return name < other.name;
+}
 
+bool Hotel::operator>(const Hotel& other) const {
+    return name > other.name;
+}
 
+bool Hotel::operator>=(const Hotel& other) const {
+    return name >= other.name;
+}
 
+bool Hotel::operator<=(const Hotel& other) const {
+    return name <= other.name;
+}
+
+bool Hotel::operator==(const Hotel& other) const {
+    return name == other.name;
+}
+
+bool Hotel::operator!=(const Hotel& other) const {
+    return name != other.name;
+}
+
+Hotel& Hotel::operator=(const Hotel& other) {
+    if (this != &other) {
+        name = other.name;
+        rooms = other.rooms;
+    }
+    return *this;
+}
