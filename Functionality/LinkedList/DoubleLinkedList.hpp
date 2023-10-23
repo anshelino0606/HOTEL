@@ -138,10 +138,9 @@ public:
     void display() {
         Node<T>* current = head;
         while (current != nullptr) {
-            std::cout << current->data << " ";
+            std::cout << current->data << std::endl;
             current = current->next;
         }
-        std::cout << std::endl;
     }
 
 
@@ -170,6 +169,28 @@ public:
             current = current->next;
         }
         return nullptr;
+    }
+
+    void sort() {
+        Node<T>* current = head;
+        Node<T>* index = nullptr;
+        T temp;
+        if (head == nullptr) {
+            return;
+        } else {
+            while (current != nullptr) {
+                index = current->next;
+                while (index != nullptr) {
+                    if (current->data > index->data) {
+                        temp = current->data;
+                        current->data = index->data;
+                        index->data = temp;
+                    }
+                    index = index->next;
+                }
+                current = current->next;
+            }
+        }
     }
 
 
