@@ -6,23 +6,24 @@
 #include <fstream>
 #include <string>
 
-template<class T>
-class Node {
-public:
-    Node() : next(nullptr) {}
-
-    Node(T data) :
-        data(data), next(nullptr) {}
-
-    T data;
-
-    Node* next;
-};
-
 
 template<typename T>
 class SingleLinkedList {
 public:
+
+    template<class M>
+    class Node {
+    private:
+        Node() : next(nullptr) {}
+
+        Node(M data) :
+                data(data), next(nullptr) {}
+
+        M data;
+
+        Node* next;
+
+    };
 
     SingleLinkedList() : head(nullptr), tail(nullptr), size(0) {}
 
@@ -164,9 +165,8 @@ public:
         return result;
     }
 
-
-    Node<T>* head;
 private:
+    Node<T>* head;
     Node<T>* tail;
     size_t size;
 };
