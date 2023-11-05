@@ -194,6 +194,15 @@ public:
         }
     }
 
+    friend std::ostream& operator<<(std::ostream& os, const DoubleLinkedList& list) {
+        Node<T>* current = list.head;
+        while (current != nullptr) {
+            os << current->data << std::endl;
+            current = current->next;
+        }
+        return os;
+    }
+
 protected:
     size_t size;
     Node<T>* tail;
