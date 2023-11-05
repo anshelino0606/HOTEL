@@ -74,3 +74,6 @@ bool RoomLux::addReservation(Reservation *reservation) {
 std::string RoomLux::getClass() {
     return "Lux";
 }
+
+RoomLux::RoomLux()
+    : Room() {}

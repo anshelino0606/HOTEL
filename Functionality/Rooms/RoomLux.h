@@ -15,6 +15,8 @@ enum class RegulatoryStandard {
 
 class RoomLux : public Room {
 public:
+    RoomLux();
+
     RoomLux(unsigned int noRooms,
                  unsigned int roomArea,
                  unsigned int maxCapacity,
