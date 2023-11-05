@@ -235,6 +235,10 @@ std::ostream &operator<<(std::ostream &os, const Room &room) {
     os << "Max Capacity: " << room.maxCapacity << " people\n";
     os << "Price per Night: $" << room.pricePerNight << "\n";
     os << "Dates Booked: ";
+    if (room.reservations == nullptr) {
+        os << "None\n";
+        return os;
+    }
     for (unsigned int i = 0; i < room.noRooms; ++i) {
         os << room.reservations[i];
         if (i < room.noRooms - 1) {
@@ -279,4 +283,51 @@ Room::Room()
 
 unsigned int Room::getRoomNumber() const {
     return roomNumber;
+}
+
+bool Room::hasReservationAt(const Guest& guest) {
+    for (unsigned int i = 0; i < noRooms; ++i) {
+        if (reservations[i].getGuestID() == guest.getID()) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void Room::removeReservation(Reservation* reservation) {
+    // Find the reservation in the array
+    unsigned int index = 0;
+    for (unsigned int i = 0; i < noRooms; ++i) {
+        if (reservations[i] == *reservation) {
+            index = i;
+            break;
+        }
+    }
+
+    // Shift the elements after the reservation to the left
+    for (unsigned int i = index; i < noRooms - 1; ++i) {
+        reservations[i] = reservations[i + 1];
+    }
+
+    // Decrement the number of reservations
+    --noRooms;
+}
+
+void Room::removeReservationAt(Guest* guest) {
+    // Find the reservation in the array
+    unsigned int index = 0;
+    for (unsigned int i = 0; i < noRooms; ++i) {
+        if (reservations[i].getGuestID() == guest->getID()) {
+            index = i;
+            break;
+        }
+    }
+
+    // Shift the elements after the reservation to the left
+    for (unsigned int i = index; i < noRooms - 1; ++i) {
+        reservations[i] = reservations[i + 1];
+    }
+
+    // Decrement the number of reservations
+    --noRooms;
 }
