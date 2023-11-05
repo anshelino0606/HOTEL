@@ -11,6 +11,7 @@
 static const unsigned int MAX_NUMBER = 100;
 
 class Reservation;
+class Guest;
 
 class Room {
 
@@ -38,6 +39,8 @@ public:
     virtual bool isDateInRange(const Date& date, const Date& rangeStart, const Date& rangeEnd);
     virtual bool isNumberAvailableAt(const Date& dateStart, const Date& dateEnd, unsigned int number);
 
+    virtual bool hasReservationAt(const Guest& guest);
+
     // cost for range of dates
     virtual unsigned int calculateCost(const Date& dateStart, const Date& dateEnd);
 
@@ -46,6 +49,8 @@ public:
 
     // add reservation
     virtual bool addReservation(Reservation* reservation);
+    virtual void removeReservation(Reservation* reservation);
+    virtual void removeReservationAt(Guest* guest);
 
     virtual std::string getClass();
 
