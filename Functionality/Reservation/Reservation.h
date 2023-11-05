@@ -52,6 +52,8 @@ public:
 
     unsigned int getDurationInDays() const;
 
+    bool operator==(const Reservation& other) const;
+
     // Check-in and check-out operations
 //    void checkIn();
 //    void checkOut();
