@@ -112,3 +112,11 @@ std::istream &operator>>(std::istream &is, Reservation &reservation) {
     return is;
 }
 
+bool Reservation::operator==(const Reservation& other) const {
+    return this->room == other.room && this->dateStart == other.dateStart && this->dateEnd == other.dateEnd &&
+           this->userID == other.userID && this->isCheckedIn == other.isCheckedIn && this->cost == other.cost &&
+           this->numGuests == other.numGuests && this->confirmationCode == other.confirmationCode &&
+           this->specialRequests == other.specialRequests;
+}
+
+
