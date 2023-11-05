@@ -180,3 +180,13 @@ Hotel::Hotel() {
         rooms[i] = Room();
     }
 }
+
+void Hotel::removeReservation(Guest &guest, Room &room) {
+    // Check if room has reservations on this guest's name
+    if (room.hasReservationAt(guest)) {
+        // Remove the reservation
+        room.removeReservationAt(&guest);
+    } else {
+        std::cout << "The room does not have any reservations on this guest's name." << std::endl;
+    }
+}
