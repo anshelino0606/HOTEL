@@ -8,25 +8,26 @@
 #include <iostream>
 
 
-template<class T>
-class Node {
-public:
-    Node() : next(nullptr), prev(nullptr) {}
-
-    Node(T data) :
-        data(data), next(nullptr), prev(nullptr) {}
-
-    Node* prev;
-
-    T data;
-
-    Node* next;
-};
 
 template<typename T>
 class DoubleLinkedList {
 
 public:
+
+    template<class U>
+    class Node {
+    public:
+        Node() : next(nullptr), prev(nullptr) {}
+
+        Node(U data) :
+                data(data), next(nullptr), prev(nullptr) {}
+
+        Node* prev;
+
+        U data;
+
+        Node* next;
+    };
 
     // doubly linked list templated
     DoubleLinkedList() : head(nullptr), tail(nullptr) {}
@@ -49,17 +50,17 @@ public:
     }
 
     // push element to the end of the list
-//    void push_back(T value) {
-//        Node<T>* newNode = new Node<T>(value);
-//        if (empty()) {
-//            head = tail = newNode;
-//        } else {
-//            tail->next = newNode;
-//            newNode->prev = tail;
-//            tail = newNode;
-//        }
-//        size++;
-//    }
+    void push_back(T value) {
+        Node<T>* newNode = new Node<T>(value);
+        if (empty()) {
+            head = tail = newNode;
+        } else {
+            tail->next = newNode;
+            newNode->prev = tail;
+            tail = newNode;
+        }
+        size++;
+    }
 
     void pushFront(T value) {
         Node<T>* newNode = new Node<T>(value);
@@ -193,11 +194,10 @@ public:
         }
     }
 
-
-    Node<T>* head;
 protected:
     size_t size;
     Node<T>* tail;
+    Node<T>* head;
 
 };
 
