@@ -30,7 +30,7 @@ public:
     };
 
     // doubly linked list templated
-    DoubleLinkedList() : head(nullptr), tail(nullptr) {}
+    DoubleLinkedList() : head(nullptr), tail(nullptr), size(0) {}
 
     // copy constructor
     DoubleLinkedList(const DoubleLinkedList& other) {
@@ -39,6 +39,7 @@ public:
             this->add(current->data);
             current = current->next;
         }
+        this->size = other.size;
     }
 
     // move constructor
@@ -201,6 +202,37 @@ public:
             current = current->next;
         }
         return os;
+    }
+
+    // remove same elements
+    void removeSame() {
+        Node<T>* current = head;
+
+        // Check if the list is empty or has only one element
+        if (current == nullptr || current->next == nullptr) {
+            return;
+        }
+
+        while (current != nullptr) {
+            Node<T>* runner = current;
+
+            // Iterate through the remaining nodes to check for duplicates
+            while (runner->next != nullptr) {
+                if (current->data == runner->next->data) {
+                    // Remove the duplicate node
+                    Node<T>* duplicate = runner->next;
+                    runner->next = runner->next->next;
+                    if (runner->next != nullptr) {
+                        runner->next->prev = runner;
+                    }
+                    delete duplicate;
+                } else {
+                    runner = runner->next;
+                }
+            }
+
+            current = current->next;
+        }
     }
 
 protected:
