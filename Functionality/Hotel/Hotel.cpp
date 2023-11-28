@@ -12,11 +12,15 @@ void Hotel::loadFromFile(const std::string &filename)  {
     try {
         std::ifstream file(filename);
         if (!file.is_open()) {
-            throw std::runtime_error("Failed to open the CSV file.");
+            throw std::runtime_error("Failed to open the CSV file: " + filename);
         }
 
         std::string line;
         std::getline(file, line); // Read and discard the header line if it exists
+
+        // Reset the file to the beginning
+        file.clear(); // Clear any flags that might affect file operation
+        file.seekg(0, std::ios::beg);
 
         // Count the number of lines in the file to determine the array size
         int numLines = 0;
@@ -24,41 +28,79 @@ void Hotel::loadFromFile(const std::string &filename)  {
             numLines++;
         }
 
-        // Reset the file to the beginning
+        // Reset the file again to the beginning
         file.clear();
-        file.seekg(0);
+        file.seekg(0, std::ios::beg);
 
         // Allocate memory for the dynamic array of rooms
-        rooms = new Room[numLines];
+        rooms = std::vector<Room>(numLines - 1);
 
         int roomIndex = 0;
 
         // Read and parse the CSV data
         while (std::getline(file, line)) {
-            std::istringstream iss(line);
-            std::string token;
-
-            // Variables to store CSV values
-            unsigned int noRooms, roomArea, maxCapacity, pricePerNight;
-
-            if (std::getline(iss, token, ',')) {
-                noRooms = std::stoi(token);
+            if (line.empty()) {
+                continue; // Skip empty lines
             }
 
-            if (std::getline(iss, token, ',')) {
-                roomArea = std::stoi(token);
+            if (line.back() == '\r') {
+                line.pop_back(); // Remove carriage return character if present
             }
 
-            if (std::getline(iss, token, ',')) {
-                maxCapacity = std::stoi(token);
-            }
+            if (line.substr(0, 5) == "Hotel") {
+                name = line;
+            } else {
+                // Parse room information
+                std::istringstream iss(line);
+                std::string token;
 
-            if (std::getline(iss, token, ',')) {
-                pricePerNight = std::stoi(token);
-            }
+                // Variables to store CSV values
+                unsigned int noRooms, roomArea, maxCapacity;
+                double pricePerNight;
 
-            // Create a Room object and add it to the dynamic array
-            rooms[roomIndex++] = Room(noRooms, roomArea, maxCapacity, nullptr, pricePerNight);
+                if (std::getline(iss, token, ' ')) {
+                    noRooms = std::stoi(token);
+                }
+
+                if (std::getline(iss, token, ' ')) {
+                    roomArea = std::stoi(token);
+                }
+
+                if (std::getline(iss, token, ' ')) {
+                    maxCapacity = std::stoi(token);
+                }
+
+                if (std::getline(iss, token, ' ')) {
+                    pricePerNight = std::stod(token);
+                }
+
+                Room room(noRooms, roomArea, maxCapacity, pricePerNight);
+
+                while (std::getline(iss, token, ',')) {
+                    // Skip leading spaces
+                    size_t pos = token.find_first_not_of(' ');
+                    if (pos != std::string::npos) {
+                        token = token.substr(pos);
+                    }
+
+                    // Check if the token is not empty
+                    if (!token.empty()) {
+                        // Assuming reservations are in the format "YYYY-MM-DD"
+                        // divide it into year, month and day
+                        int year, month, day;
+                        year = std::stoi(token.substr(0, 4));
+                        month = std::stoi(token.substr(5, 2));
+                        day = std::stoi(token.substr(8, 2));
+                        Date date(year, month, day);
+                        rooms[roomIndex].addReservation(new Reservation(&rooms[roomIndex], date, date, 0));
+                    }
+                }
+
+                // Create a Room object and add it to the current hotel
+
+                this->rooms.push_back(room);
+                roomIndex++;
+            }
         }
     } catch (const std::exception& e) {
         std::cerr << "Error loading room information from CSV file: " << e.what() << std::endl;
@@ -117,20 +159,19 @@ void Hotel::addReservation(Guest& guest, Room& room, const Date& dateStart, cons
 
 Hotel::Hotel(const std::string &name) {
     this->name = name;
-    rooms = new Room[3];
-    for (int i = 0; i < 3; i++) {
-        rooms[i] = Room();
-    }
 }
 
 
 std::ostream& operator<<(std::ostream& os, const Hotel& hotel) {
     os << "Hotel: " << hotel.name << std::endl;
+    if (hotel.rooms == std::vector<Room>(0)) {
+        os << "No rooms available." << std::endl;
+        return os;
+    }
     os << "Rooms: " << std::endl;
     for (int i = 0; i < MAX_NUMBER; i++) {
         os << hotel.rooms[i] << std::endl;
     }
-    return os;
 }
 
 std::istream& operator>>(std::istream& is, Hotel& hotel) {
@@ -175,10 +216,7 @@ Hotel& Hotel::operator=(const Hotel& other) {
 
 Hotel::Hotel() {
     name = "";
-    rooms = new Room[3];
-    for (int i = 0; i < 3; i++) {
-        rooms[i] = Room();
-    }
+    rooms = std::vector<Room>(0);
 }
 
 void Hotel::removeReservation(Guest &guest, Room &room) {
@@ -189,4 +227,8 @@ void Hotel::removeReservation(Guest &guest, Room &room) {
     } else {
         std::cout << "The room does not have any reservations on this guest's name." << std::endl;
     }
+}
+
+int Hotel::getNumberOfRooms() const {
+    return sizeof(rooms);
 }

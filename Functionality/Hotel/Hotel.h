@@ -48,9 +48,12 @@ public:
     friend std::istream& operator>>(std::ostream& is, const Hotel& hotel);
 
 
+    //get number of rooms
+    int getNumberOfRooms() const;
+
 
     std::string name;
-    Room* rooms;
+    std::vector<Room> rooms;
 };
 
 
